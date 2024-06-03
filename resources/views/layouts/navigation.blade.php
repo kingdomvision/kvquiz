@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <x-application-logo/>
                     </a>
                 </div>
             </div>
@@ -15,11 +15,11 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @auth
                     @user
-                    <x-nav-link :href="route('my-results')" :active="request()->routeIs('my-results')">
-                        My Result
+                    <x-nav-link :href="route('user.results')" :active="request()->routeIs('user.results')">
+                        Result
                     </x-nav-link>
-                    <x-nav-link :href="route('my-quiz-list')" :active="request()->routeIs('my-quiz-list')">
-                        My Quiz
+                    <x-nav-link :href="route('user.quiz-list')" :active="request()->routeIs('user.quiz-list')">
+                        Quiz
                     </x-nav-link>
                     @enduser
                     @admin
@@ -44,8 +44,8 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('admins')">
-                                Admins
+                            <x-dropdown-link :href="route('users.list')">
+                                Users
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('questions')">
                                 Questions

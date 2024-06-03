@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            My Quiz
+            Quiz List
         </h2>
     </x-slot>
 
@@ -41,10 +41,17 @@
                                     {{ $quiz->questions_count }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('quiz.show', $quiz->slug) }}"
-                                       class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
-                                        View
-                                    </a>
+                                    @if(in_array($quiz->id, $user_completed_quizzes))
+                                        <a href="{{ route('user.results', $quiz->slug) }}"
+                                           class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+                                            See result
+                                        </a>
+                                    @else
+                                        <a href="{{ route('user.quiz.show', $quiz->slug) }}"
+                                           class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+                                            Start Quiz
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @empty
@@ -52,6 +59,7 @@
                         @endforelse
                         </tbody>
                     </table>
+                    {{ $quizzes->links() }}
                 </div>
             </div>
         </div>

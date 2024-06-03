@@ -27,14 +27,19 @@ class Quiz extends Model
         'public'    => 'boolean',
     ];
 
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }
 
-    public function questions()
+    public function questions(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Question::class);
+    }
+
+    public function tests(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Test::class);
     }
 
     public function scopePublic($q)

@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @if (isset($title))
-        <title>{{ $title }}</title>
+    @if (!empty(request()->segment(2)))
+        <title>Kingdom Vision | {{ ucfirst(str_replace('-', ' ', request()->segment(2))) }}</title>
     @else
-        <title>Quiz System</title>
+        <title>Kingdom Vision</title>
     @endif
 
     <!-- Fonts -->

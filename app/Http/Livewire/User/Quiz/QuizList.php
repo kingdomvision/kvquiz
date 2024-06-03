@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Tests;
+namespace App\Http\Livewire\User\Quiz;
 
 use App\Models\Quiz;
-use App\Models\Test;
 use Livewire\Component;
 
-class MyTestList extends Component
+class QuizList extends Component
 {
     protected int $paginate = 10;
 
@@ -17,9 +16,11 @@ class MyTestList extends Component
             ->latest()
             ->paginate($this->paginate);
 
-        return view('livewire.admin.tests.my-test-list', [
-            'quizzes' => $quizzes,
-            'i' => (request()->input('page', 1) - 1) * $this->paginate
-        ]);
+        return view('livewire.user.quiz.quiz-list',
+            [
+                'quizzes' => $quizzes,
+                'i' => (request()->input('page', 1) - 1) * $this->paginate,
+                'user_completed_quizzes' => auth()->user()->tests()->pluck('quiz_id')->toArray()
+            ]);
     }
 }
